@@ -5,5 +5,6 @@ class CreateUserActivities < ActiveRecord::Migration
       t.integer :activity_id
 
       t.timestamps null: false
+    end
   end
 end
