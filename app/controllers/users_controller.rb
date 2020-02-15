@@ -1,15 +1,16 @@
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
 
     get '/login' do
-        if current_user
-            redirect '/users/:id'
-        else
-        erb :login
-        end
+        #if self.current_user
+            #redirect '/users/:id'
+        #else
+        erb :'users/login'
+        #end
     end
 
     post '/login' do
         @user = User.find_by(:username => params["username"])
+        @dependents = @user.dependents
         session[:user_id] = @user.id
         redirect '/users/:id'
     end
