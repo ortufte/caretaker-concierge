@@ -1,0 +1,13 @@
+<% @user.dependents.each do |d| %>
+    <%= d.name %> #also want to link to dependent show page
+    <% d.activities.each do |a| %>
+        <%= a.name %> 
+        <%= a.contact_name %>
+        <%= a.contact_phone %>
+        <%= a.website %> #also link to the website
+        <%= a.notes %> 
+
+        
+
+
+
