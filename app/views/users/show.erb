@@ -1,3 +1,5 @@
+<h2> Welcome to your dashboard, <%= @user.name %>!
+
 <% @user.dependents.each do |d| %>
     <%= d.name %> 
     <% d.activities.each do |a| %> 
