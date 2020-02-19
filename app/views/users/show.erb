@@ -1,9 +1,9 @@
-<h2> Welcome to your dashboard, <%= @user.name %>!
+<h2> Welcome to your dashboard, <%= @user.name %>! </h2>
 
 <% @user.dependents.each do |d| %>
-    <%= d.name %> 
+    <p><%= d.name %></p>
     <% d.activities.each do |a| %> 
-       <%= a.title %>
+       <p><%= a.title %></p>
     <% end %>
     <% end %>
 
