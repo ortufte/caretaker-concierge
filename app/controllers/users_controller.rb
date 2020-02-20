@@ -25,6 +25,11 @@ class UsersController < ApplicationController
         end
     end
 
+    get '/users/logout' do
+        session.clear
+        redirect '/'
+    end
+
     get '/users/:id' do
         @user = User.find_by(:id => params[:id])
         erb :'users/show'

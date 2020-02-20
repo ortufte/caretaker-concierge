@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "organizeyourlife"
   end
 
-  get "/" do
+  get '/' do
     #if logged in? 
       #redirect "/users/#{current_user.id)
     #else
