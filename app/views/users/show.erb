@@ -1,15 +1,16 @@
 <h2> Welcome to your dashboard, <%= @user.name %>! </h2>
 
+<h3>Your dependents and their activities:</h3>
+<br>
 <% @user.dependents.each do |d| %>
-    <p><%= d.name %></p>
+    <h4><a href=""><%= d.name %></a></h4>
+    <br>
     <% d.activities.each do |a| %> 
-       <p><%= a.title %></p>
+       <ul>
+       <li><a href=""><%= a.title %></a></li>
+       </ul>
     <% end %>
+    <br>
     <% end %>
 
-
-
-        
-
-
-
+<h5>Click on the name of the dependent or activity to view more details.</h5>
