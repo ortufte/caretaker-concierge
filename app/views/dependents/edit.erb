@@ -1,0 +1,16 @@
+<h3>Edit Dependent:</h3>
+
+<form action="/dependents/<%= @dependent.id %>" method="post" >
+<input id="hidden" type="hidden" name="_method" value="patch">
+
+<label>Dependent Name:
+<input type="text" name="name" value= <%= @dependent.name %>>
+</label>
+
+<input type="submit" value="Submit">
+
+<form action="/dependents/:id/delete" method="POST">
+<input="submit" value="Delete Dependent">
+</form>
+
+</form>
