@@ -7,7 +7,7 @@
     <br>
     <% d.activities.each do |a| %> 
        <ul>
-       <li><a href=""><%= a.title %></a></li>
+       <li><a href="/activities/<%= a.id %>"><%= a.title %></a></li>
        </ul>
     <% end %>
     <br>
