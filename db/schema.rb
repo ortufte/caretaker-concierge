@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200214215521) do
+ActiveRecord::Schema.define(version: 20200224153606) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20200214215521) do
     t.string   "contact_phone"
     t.string   "website"
     t.text     "notes"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "dependent_name"
     t.integer  "dependent_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
   end
 
   create_table "dependents", force: :cascade do |t|
