@@ -1,0 +1,20 @@
+<h2> <%= @dependent.name %>'s Activities </h2>
+
+<% @dependent.activities.each do |a| %>
+    <ul>
+    <li><a href=""><%= a.title %></a></li>
+    </ul>
+<% end %>
+
+<form action='/activities/new' 
+
+<a href="/dependents/<%= @dependent.id %>/edit">Edit Dependent</a>
+<a href="/activities/new">Create New Activity</a>
+
+<form action="/dependents/<%= @dependent.id %>/delete" method="POST">
+<input id="hidden" type="hidden" name="_method" value="delete">
+
+<input type="submit" value="Delete Dependent">
+</form>
+
+
