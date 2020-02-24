@@ -3,7 +3,7 @@
 <h3>Your dependents and their activities:</h3>
 <br>
 <% @user.dependents.each do |d| %>
-    <h4><a href=""><%= d.name %></a></h4>
+    <h4><a href="/dependents/<%=d.id%>"><%= d.name %></a></h4>
     <br>
     <% d.activities.each do |a| %> 
        <ul>
