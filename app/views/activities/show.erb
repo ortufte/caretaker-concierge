@@ -1,0 +1,23 @@
+<h2> <%= @activity.title %></h2>
+
+<h4>Dependent Name: <%= @activity.dependent_name %></h4>
+<br>
+<h4>Contact Name: <%= @activity.contact_name %></h4>
+<br>
+<h4>Contact Phone: <%= @activity.contact_phone %></h4>
+<br>
+<h4>Website: <%= @activity.website %></h4>
+<br>
+<h4>Notes: <%= @activity.notes %></h4>
+
+<br>
+<form action="/activities/<%= @activity.id %>/edit" method="GET">
+
+<input type="submit" value="Edit Activity">
+</form>
+<br>
+<form action="/activities/<%= @activity.id %>/delete" method="POST">
+<input id="hidden" type="hidden" name="_method" value="delete">
+
+<input type="submit" value="Delete Activity">
+</form>
