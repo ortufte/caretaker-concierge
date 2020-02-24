@@ -1,0 +1,33 @@
+<h2>Edit Activity:</h2>
+
+<form action="/activities/<%= @activity.id %>" method="post">
+<input id="hidden" type="hidden" name="_method" value="patch">
+
+
+<label>Title:
+<input type="text" name="activity[title]" value= <%= @activity.title %>>
+</label>
+<label>Dependent Name:
+<input type="text" name="activity[dependent_name]" value= <%= @activity.dependent_name %>>
+</label>
+<label>Contact Name:
+<input type="text" name="activity[contact_name]" value= <%= @activity.contact_name %>>
+</label>
+<label>Contact Phone:
+<input type="text" name="activity[contact_phone]" value= <%= @activity.contact_phone %>>
+</label>
+<label>Website:
+<input type="text" name="activity[website]" value= <%= @activity.website %>>
+</label>
+<label>Notes:
+<input type="text" name="activity[notes]" value= <%= @activity.notes %>>
+</label>
+
+<input type="submit" value ="Submit">
+
+<form action="/activities/:id/delete" method="POST">
+<input="submit" value="Delete Activity">
+</form>
+
+</form>
+
