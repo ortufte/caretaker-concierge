@@ -2,14 +2,24 @@
 
 <% @dependent.activities.each do |a| %>
     <ul>
-    <li><a href=""><%= a.title %></a></li>
+    <li><a href="/activities/<%= a.id %>"><%= a.title %></a></li>
     </ul>
 <% end %>
 
-<form action='/activities/new' 
+<br>
 
-<a href="/dependents/<%= @dependent.id %>/edit">Edit Dependent</a>
-<a href="/activities/new">Create New Activity</a>
+<form action="/activities/new" method="GET">
+<input type="submit" value="Create New Activity">
+</form>
+
+<br>
+
+<form action="/dependents/<%= @dependent.id %>/edit" method="GET">
+
+<input type="submit" value="Edit Dependent">
+</form>
+
+<br>
 
 <form action="/dependents/<%= @dependent.id %>/delete" method="POST">
 <input id="hidden" type="hidden" name="_method" value="delete">
