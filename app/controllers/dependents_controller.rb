@@ -35,6 +35,11 @@ class DependentsController < ApplicationController
             redirect to "/users/#{@user.id}"
         else
             @dependent.name = params["name"]
+            @dependent.activities.all.each do |a|
+                a.dependent_name = params["name"]
+                a.save
+            end
+
             @dependent.save
             redirect to "/dependents/#{@dependent.id}"
         end
