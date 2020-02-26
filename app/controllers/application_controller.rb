@@ -7,14 +7,11 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "organizeyourlife"
+    register Sinatra::Flash
   end
 
   get '/' do
-    if logged_in? 
-      redirect "/users/#{current_user.id}"
-    else
       erb :index
-    end
   end
 
   helpers do 
@@ -26,6 +23,7 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(:id => session[:user_id])
     end
+
   end 
 
 end
