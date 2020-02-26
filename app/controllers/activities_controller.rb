@@ -1,16 +1,32 @@
 class ActivitiesController < ApplicationController
 
     get '/activities/new' do 
-        erb :'activities/new'
+        if !logged_in?
+            flash[:error] = "You must be logged in to create an activity."
+            redirect '/users/login'
+        else
+            erb :'activities/new'
+        end
     end
 
     post '/activities/new' do
-        @activity = Activity.create(params)
+        @existing_activity = Activity.find_by(:title => params[:title])
         @dependent = Dependent.find_by(:name => params[:dependent_name])
-        @activity.dependent = @dependent
-        @dependent.activities << @activity
-        current_user.activities << @activity
-        redirect "/dependents/#{@dependent.id}"
+
+        if @existing_activity && @existing_activity.dependent_id == @dependent.id        
+            flash[:error] = "Activity already exists for this dependent."
+            redirect "/dependents/#{@dependent.id}"
+        elsif params[:title].empty? || params[:dependent_name].empty?
+            flash[:error] = "Dependent Name and Activity Title must be filled in to create an activity."
+            redirect to "/activities/new"
+        else
+            @activity = Activity.create(params)
+            @dependent = Dependent.find_by(:name => params[:dependent_name])
+            @activity.dependent = @dependent
+            @dependent.activities << @activity
+            current_user.activities << @activity
+            redirect "/dependents/#{@dependent.id}"
+        end
     end
 
     get '/activities/:id' do
@@ -19,8 +35,15 @@ class ActivitiesController < ApplicationController
     end
 
     get '/activities/:id/edit' do
+        @user = current_user
+        @activity = Activity.find_by(:id => params[:id])
+
         if !logged_in?
+            flash[:error] = "You must be logged in to edit an activity."
             redirect '/users/login'
+        elsif !current_user.dependents.include?(@dependent)
+            flash[:error] = "You cannot edit activities that do not belong to you."
+            redirect to "/users/#{@user.id}"
         else
             @activity = Activity.find_by(:id => params[:id])
             erb :'activities/edit'
@@ -30,31 +53,31 @@ class ActivitiesController < ApplicationController
     patch '/activities/:id' do
         @activity = Activity.find_by(:id => params[:id])
         @dependent = @activity.dependent
-        @user_activity = current_user.activities.find_by(params[:id])
 
-        if current_user.dependents.include?(@dependent)
+        if params[:title].empty? || params[:dependent_name].empty?
+            flash[:error] = "Dependent Name and Activity Title must be filled in to edit an activity."
+            redirect to "/activities/#{@activity.id}/edit"
+        else
             @activity.update(params[:activity])
             redirect to "/dependents/#{@dependent.id}"
-        else
-            redirect to "/users/#{@user.id}"
         end
     end
     
     delete '/activities/:id/delete' do
-        if !logged_in?
-            redirect '/users/login'
-        else
-            @activity = Activity.find_by(:id => params[:id])
-            @dependent = @activity.dependent
-            @user_activity = current_user.activities.find_by(params[:id])
+        @activity = Activity.find_by(:id => params[:id])
+        @dependent = @activity.dependent
+        @user_activity = current_user.activities.find_by(params[:id])
 
-            if current_user.dependents.include?(@dependent)
-                @activity.delete
-                @user_activity.delete
-                redirect to "/dependents/#{@dependent.id}"
-            else
-                redirect to "/users/#{@user.id}"
-            end
+        if !logged_in?
+            flash[:log_in_to_delete_activity] = "You need to be logged in to delete an activity."
+            redirect '/users/login'
+        elsif !current_user.dependents.include?(@dependent)
+            flash[:log_in_to_delete_dependent] = "You cannot delete an activity that doesn't belong to you."
+            redirect to "/users/#{@user.id}"
+        else
+            @activity.delete
+            @user_activity.delete
+            redirect to "/dependents/#{@dependent.id}"
         end
 
     end
