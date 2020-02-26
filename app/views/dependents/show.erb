@@ -1,26 +1,20 @@
 <h2> <%= @dependent.name %>'s Activities </h2>
 
-<% @dependent.activities.each do |a| %>
-    <ul>
-    <li><a href="/activities/<%= a.id %>"><%= a.title %></a></li>
-    </ul>
+<% @dependent.activities.each.with_index(1) do |a, i| %>
+    <p><%= i %>. <a href="/activities/<%= a.id %>"><%= a.title %></a></p>
+    <p>Contact Name: <%= a.contact_name %></p>
+    <p>Contact Phone: <%= a.contact_phone %></p>
+    <p>Website: <%= a.website %></p>
+    <p>Notes: <%= a.notes %></p>
 <% end %>
-
 <br>
-
-<form action="/activities/new" method="GET">
-<input type="submit" value="Create New Activity">
-</form>
-
+<a href="/users/<%=current_user.id %>">Home</a>
 <br>
-
-<form action="/dependents/<%= @dependent.id %>/edit" method="GET">
-
-<input type="submit" value="Edit Dependent">
-</form>
-
+<a href="/activities/new">Create a New Activity</a>
 <br>
-
+<a href="/dependents/<%= @dependent.id %>/edit">Edit Dependent</a>
+<br>
+<br>
 <form action="/dependents/<%= @dependent.id %>/delete" method="POST">
 <input id="hidden" type="hidden" name="_method" value="delete">
 
