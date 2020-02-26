@@ -6,7 +6,8 @@ class DependentsController < ApplicationController
 
     post '/dependents/new' do
         @dependent = Dependent.create(params)
-        @dependent.user_id = current_user.id 
+        @dependent.user_id = current_user.id
+        current_user.dependents << @dependent
         redirect "/dependents/#{@dependent.id}"
     end
 
