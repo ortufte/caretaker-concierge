@@ -6,8 +6,17 @@ class UsersController < ApplicationController
 
     post '/users/signup' do
         @user = User.create(params)
-        session[:user_id] = @user.id
-        redirect "/users/#{@user.id}"
+        if params[:name].blank? || params[:email].blank? || params[:password].blank?
+            flash[:error] = "Please fill in all fields to sign up."
+            redirect '/users/signup'
+        elsif @user.valid?
+            session[:user_id] = @user.id
+            redirect to "/users/#{@user.id}"
+        else
+            flash[:error] = "User already exists, please log in."
+            redirect to '/users/login'
+        end
+      
     end
     
     get '/users/login' do
@@ -15,12 +24,14 @@ class UsersController < ApplicationController
     end
 
     post '/users/login' do
-        @user = User.find_by(:email => params["email"])
-        if @user.authenticate(params["password"])
+        if !@user = User.find_by(:email => params["email"])
+            flash[:error] = "User does not exist, please sign up!"
+            redirect to '/users/signup'
+        elsif @user && @user.authenticate(params["password"])
             session[:user_id] = @user.id
-            redirect "/users/#{@user.id}"
+            redirect to "/users/#{@user.id}"
         else
-            #tell the user they entered the incorrect credentials
+            flash[:error] = "Incorrect email or password, please try again."
             redirect '/users/login'
         end
     end
