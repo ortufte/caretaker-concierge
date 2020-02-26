@@ -1,3 +1,7 @@
+<% if flash[:error] %>
+<%= flash[:error] %> 
+<% end %>
+
 <h3>Edit Dependent:</h3>
 
 <form action="/dependents/<%= @dependent.id %>" method="post" >

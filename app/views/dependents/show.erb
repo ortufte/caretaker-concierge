@@ -1,3 +1,8 @@
+
+<% if flash[:error] %>
+<%= flash[:error] %> 
+<% end %>
+
 <h2> <%= @dependent.name %>'s Activities </h2>
 
 <% @dependent.activities.each.with_index(1) do |a, i| %>

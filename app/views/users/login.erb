@@ -1,3 +1,7 @@
+<% if flash[:error] %>
+<%= flash[:error] %> 
+<% end %>
+
 <form action='/users/login' method="post">
 
 <label>Email: 

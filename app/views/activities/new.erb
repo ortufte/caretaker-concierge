@@ -1,3 +1,7 @@
+<% if flash[:error] %>
+<%= flash[:error] %> 
+<% end %>
+
 <form action='/activities/new' method="post">
 
 <label>Dependent Name: 
@@ -26,7 +30,7 @@
 <br>
 <br>
 <label>Notes: 
-<input type=text name="notes">
+<textarea rows="2" cols="25" name="notes"></textarea>
 </label>
 
 <br>
