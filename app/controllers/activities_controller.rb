@@ -16,16 +16,14 @@ class ActivitiesController < ApplicationController
         if @existing_activity && @existing_activity.dependent_id == @dependent.id        
             flash[:error] = "Activity already exists for this dependent."
             redirect "/dependents/#{@dependent.id}"
-        elsif params[:title].empty? || params[:dependent_name].empty?
-            flash[:error] = "Dependent Name and Activity Title must be filled in to create an activity."
-            redirect to "/activities/new"
         else
-            @activity = Activity.create(params)
-            @dependent = Dependent.find_by(:name => params[:dependent_name])
-            @activity.dependent = @dependent
-            @dependent.activities << @activity
-            current_user.activities << @activity
-            redirect "/dependents/#{@dependent.id}"
+            @new_activity = @dependent.activities.build(params)
+            if @new_activity.save
+                redirect "/dependents/#{@dependent.id}"
+            else
+                flash[:error] = "Dependent Name and Activity Title must be filled in to create an activity."
+                redirect to "/activities/new"
+            end
         end
     end
 
