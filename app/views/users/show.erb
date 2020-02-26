@@ -7,11 +7,16 @@
     <br>
     <% d.activities.each do |a| %> 
        <p><a href="/activities/<%= a.id %>"><%= a.title %></a></p>
+       <p>Contact Name: <%= a.contact_name %></p>
+       <p>Contact Phone: <%= a.contact_phone %></p>
+       <p>Website: <%= a.website %></p>
+       <p>Notes: <%= a.notes %></p>
+
     <% end %>
     <br>
     <% end %>
 
-<h5>Click on the name of the dependent or activity to view more details.</h5>
+<h5>Click on the name of the dependent or activity to edit details.</h5>
 <br>
 <h5>OR</h5>
 <br>
