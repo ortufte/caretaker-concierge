@@ -15,14 +15,14 @@ class DependentsController < ApplicationController
         if @existing_dependent && @existing_dependent.user_id == current_user.id        
             flash[:error] = "Dependent already exists."
             redirect "/users/#{current_user.id}"
-        elsif params[:name].empty? 
-            flash[:error] = "Dependent Name and must be filled in to create a dependent."
-            redirect to "/dependents/new"
         else
-            @dependent = Dependent.create(params)
-            @dependent.user_id = current_user.id
-            current_user.dependents << @dependent
-            redirect "/dependents/#{@dependent.id}"
+            @new_dependent = current_user.dependents.build(params)
+            if @new_dependent.save
+                redirect "/dependents/#{@dependent.id}"
+            else
+                flash[:error] = "Dependent Name and must be filled in to create a dependent."
+                redirect to "/dependents/new"
+            end
         end
 
     end
