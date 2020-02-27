@@ -13,19 +13,24 @@ class ActivitiesController < ApplicationController
         @existing_activity = Activity.find_by(:title => params[:title])
         @dependent = Dependent.find_by(:name => params[:dependent_name])
 
-        if @existing_activity && @existing_activity.dependent_id == @dependent.id        
+        if !@dependent
+            flash[:error] = "Did not recognize dependent's name, try again."
+            redirect "/activities/new"
+        elsif @existing_activity && @existing_activity.dependent_id == @dependent.id
             flash[:error] = "Activity already exists for this dependent."
             redirect "/dependents/#{@dependent.id}"
+        elsif params[:title].empty? || params[:dependent_name].empty?
+            flash[:error] = "Dependent Name and Activity Title must be filled in to create an activity."
+            redirect to "/activities/new"
         else
-            @new_activity = @dependent.activities.build(params)
-            if @new_activity.save
-                redirect "/dependents/#{@dependent.id}"
-            else
-                flash[:error] = "Dependent Name and Activity Title must be filled in to create an activity."
-                redirect to "/activities/new"
-            end
+            @activity = @dependent.activities.build(params)
+            current_user.activities << @activity
+            @activity.save
+            redirect "/dependents/#{@dependent.id}"
         end
+
     end
+    
 
     get '/activities/:id' do
         @activity = Activity.find_by(:id => params[:id])
@@ -35,13 +40,11 @@ class ActivitiesController < ApplicationController
     get '/activities/:id/edit' do
         @user = current_user
         @activity = Activity.find_by(:id => params[:id])
+        @dependent = @user.dependents.find_by(:name => params[:dependent_name])
 
         if !logged_in?
             flash[:error] = "You must be logged in to edit an activity."
             redirect '/users/login'
-        elsif !current_user.dependents.include?(@dependent)
-            flash[:error] = "You cannot edit activities that do not belong to you."
-            redirect to "/users/#{@user.id}"
         else
             @activity = Activity.find_by(:id => params[:id])
             erb :'activities/edit'
@@ -52,9 +55,12 @@ class ActivitiesController < ApplicationController
         @activity = Activity.find_by(:id => params[:id])
         @dependent = @activity.dependent
 
-        if params[:title].empty? || params[:dependent_name].empty?
+        if params[:activity][:title].empty? || params[:activity][:dependent_name].empty?
             flash[:error] = "Dependent Name and Activity Title must be filled in to edit an activity."
             redirect to "/activities/#{@activity.id}/edit"
+        elsif !current_user.dependents.include?(@dependent)
+            flash[:error] = "You cannot edit activities that do not belong to you."
+            redirect to "/users/#{@user.id}"
         else
             @activity.update(params[:activity])
             redirect to "/dependents/#{@dependent.id}"
