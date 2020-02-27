@@ -18,9 +18,9 @@ class DependentsController < ApplicationController
         else
             @new_dependent = current_user.dependents.build(params)
             if @new_dependent.save
-                redirect "/dependents/#{@dependent.id}"
+                redirect "/dependents/#{@new_dependent.id}"
             else
-                flash[:error] = "Dependent Name and must be filled in to create a dependent."
+                flash[:error] = "Dependent Name must be filled in to create a dependent."
                 redirect to "/dependents/new"
             end
         end
@@ -51,9 +51,9 @@ class DependentsController < ApplicationController
 
     patch '/dependents/:id' do
         @dependent = Dependent.find_by(:id => params[:id])
-        @user = current_user
 
-        if params["name"].empty?
+        if params[:name].empty?
+            flash[:error] = "Dependent Name must be filled in to create a dependent."
             redirect to "/dependents/#{@dependent.id}/edit"
         else
             @dependent.name = params["name"]
