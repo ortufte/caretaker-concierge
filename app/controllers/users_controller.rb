@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     post '/users/signup' do
         @user = User.create(params)
         if params[:name].blank? || params[:email].blank? || params[:password].blank?
-            flash[:error] = "Please fill in all fields to sign up."
+            flash[:error] = "All fields are required in order to sign up."
             redirect '/users/signup'
         elsif @user.valid?
             session[:user_id] = @user.id
