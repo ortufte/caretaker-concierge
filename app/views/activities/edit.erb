@@ -1,8 +1,9 @@
 <% if flash[:error] %>
-<%= flash[:error] %> 
+    <h3 class="has-text-danger"><%= flash[:error] %></h3>
 <% end %>
 
-<h2>Edit Activity:</h2>
+<br>
+<h3 class="subtitle has-text-weight-bold">Edit Activity:</h3>
 
 <form action="/activities/<%= @activity.id %>" method="post">
 <input id="hidden" type="hidden" name="_method" value="patch">
@@ -11,21 +12,33 @@
 <label>Title:
 <input type="text" name="activity[title]" value= <%= @activity.title %>>
 </label>
+<br>
+<br>
 <label>Dependent Name:
 <input type="text" name="activity[dependent_name]" value= <%= @activity.dependent_name %>>
 </label>
+<br>
+<br>
 <label>Contact Name:
 <input type="text" name="activity[contact_name]" value= <%= @activity.contact_name %>>
 </label>
+<br>
+<br>
 <label>Contact Phone:
 <input type="text" name="activity[contact_phone]" value= <%= @activity.contact_phone %>>
 </label>
+<br>
+<br>
 <label>Website:
 <input type="text" name="activity[website]" value= <%= @activity.website %>>
 </label>
+<br>
+<br>
 <label>Notes:
 <input type="text" name="activity[notes]" value= <%= @activity.notes %>>
 </label>
+<br>
+<br>
 
 <input type="submit" value ="Submit">
 
@@ -34,6 +47,7 @@
 </form>
 
 </form>
-
+<br>
+<br>
 <a href="/activities/<%= @activity.id %>">Cancel</a>
 

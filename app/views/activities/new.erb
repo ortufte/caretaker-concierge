@@ -1,9 +1,13 @@
 <% if flash[:error] %>
-<%= flash[:error] %> 
+    <h3 class="has-text-danger"><%= flash[:error] %></h3>
 <% end %>
+
+<br>
+<h3 class="subtitle has-text-weight-bold">Create your Activity:</h3>
 
 <form action='/activities/new' method="post">
 
+<br>
 <label>Dependent Name: 
 <input type=text name="dependent_name">
 </label>
@@ -30,11 +34,11 @@
 <br>
 <br>
 <label>Notes: 
-<textarea rows="2" cols="25" name="notes"></textarea>
+<input type=text name="notes">
 </label>
-
 <br>
-<input type=submit value=Done id=submit>
+<br>
+<input type=submit value=Create Activity id=submit>
 
 </form>
 

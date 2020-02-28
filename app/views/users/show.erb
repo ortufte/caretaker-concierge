@@ -1,24 +1,26 @@
 <% if flash[:error] %>
-<%= flash[:error] %> 
+    <h3 class="has-text-danger"><%= flash[:error] %></h3>
 <% end %>
-
-<h2> Welcome to your dashboard, <%= @user.name %>! </h2>
-
-<h3>Your dependents and their activities:</h3>
 <br>
-<% @user.dependents.each.with_index(1) do |d, i| %>
-    <h4> <%= i %>. <a href="/dependents/<%=d.id%>"><%= d.name %></a> </h4>
-    <br>
-    <% d.activities.each do |a| %> 
-       <p><a href="/activities/<%= a.id %>"><%= a.title %></a></p>
-       <p>Contact Name: <%= a.contact_name %></p>
-       <p>Contact Phone: <%= a.contact_phone %></p>
-       <p>Website: <%= a.website %></p>
-       <p>Notes: <%= a.notes %></p>
+<h3 class="subtitle has-text-weight-bold"> Welcome to your dashboard, <%= @user.name %>!</h3>
+<h5>Your dependents and their activities:</h5>
+<br>
+<div class="container">
+<div class="column">
+    <% @user.dependents.each do |d| %>
+        <h5 class="subtitle has-text-weight-bold"><a href="/dependents/<%=d.id%>"><%= d.name %> - <%= d.relationship %></a></h5>
+        <% d.activities.each do |a| %> 
+            <p><a href="/activities/<%= a.id %>"><%= a.title %></a></p>
+            <p>Contact Name: <%= a.contact_name %></p>
+            <p>Contact Phone: <%= a.contact_phone %></p>
+            <p>Website: <%= a.website %></p>
+            <p>Notes: <%= a.notes %></p>
+        <% end %>
+        <br>
+    <% end %>
+    </div>
+</div>
 
-    <% end %>
-    <br>
-    <% end %>
 
 <h5>Click on the name of the dependent or activity to edit details.</h5>
 <br>

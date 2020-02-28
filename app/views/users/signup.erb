@@ -1,8 +1,9 @@
 <% if flash[:error] %>
-    <%= flash[:error] %> 
+    <h3 class="has-text-danger"><%= flash[:error] %></h3>
 <% end %>
 
-<h4>Enter your information below to get started!</h4>
+<br>
+<h3 class="subtitle has-text-weight-bold">Enter your information below to get started!</h3>
 <br>
 
 <form action='/users/signup' method="post">
@@ -20,7 +21,9 @@
 </label>
 
 <input type=submit value=SignUp id=submit>
+<br>
+<br>
+
+<a href="/">Back</a>
 
 </form>
-<br>
-<a href="/">Back</a>

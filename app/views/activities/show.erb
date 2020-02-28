@@ -1,4 +1,4 @@
-<h2> <%= @activity.title %></h2>
+<h3 class="subtitle has-text-weight-bold"><%= @activity.title %></h3>
 
 <p>Dependent Name: <%= @activity.dependent_name %></p>
 <p>Contact Name: <%= @activity.contact_name %></p>
@@ -6,11 +6,11 @@
 <p>Website: <%= @activity.website %></p>
 <p>Notes: <%= @activity.notes %></p>
 <br>
+<a href="/activities/<%= @activity.id %>/edit">Edit Activity</a>
+<br>
 <a href="/dependents/<%= @activity.dependent.id %>">Back to Dependent Page</a>
 <br>
 <a href="/users/<%=current_user.id %>">Home</a>
-<br>
-<a href="/activities/<%= @activity.id %>/edit">Edit Activity</a>
 <br>
 <br>
 <form action="/activities/<%= @activity.id %>/delete" method="POST">

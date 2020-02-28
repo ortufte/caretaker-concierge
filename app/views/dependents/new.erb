@@ -1,16 +1,22 @@
 <% if flash[:error] %>
-<%= flash[:error] %> 
+    <h3 class="has-text-danger"><%= flash[:error] %></h3>
 <% end %>
 
-<h3>Create a new dependent:</h3>
 <br>
+<h3 class="subtitle has-text-weight-bold">Create a new dependent:</h3>
 
 <form action='/dependents/new' method="post">
 
 <label>Name: 
 <input type=text name="name">
 </label>
-
-<input type=submit value=Next id=submit>
+<br>
+<br>
+<label>Relationship: 
+<input type=text name="relationship">
+</label>
+<br>
+<br>
+<input type=submit value=Create Dependentid=submit>
 
 </form>

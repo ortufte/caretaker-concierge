@@ -1,8 +1,9 @@
 <% if flash[:error] %>
-<%= flash[:error] %> 
+    <h3 class="has-text-danger"><%= flash[:error] %></h3>
 <% end %>
 
-<h3>Edit Dependent:</h3>
+
+<h3 class="subtitle has-text-weight-bold">Edit Dependent:</h3>
 
 <form action="/dependents/<%= @dependent.id %>" method="post" >
 <input id="hidden" type="hidden" name="_method" value="patch">
@@ -10,7 +11,13 @@
 <label>Dependent Name:
 <input type="text" name="name" value= "<%= @dependent.name %>">
 </label>
-
+<br>
+<br>
+<label>Dependent Relationship
+<input type="text" name="relationship" value= "<%= @dependent.relationship %>">
+</label>
+<br>
+<br>
 <input type="submit" value="Submit">
 
 <form action="/dependents/:id/delete" method="POST">
@@ -18,5 +25,6 @@
 </form>
 
 </form>
-
+<br>
+<br>
 <a href="/dependents/<%= @dependent.id %>">Cancel</a>
