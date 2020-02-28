@@ -57,6 +57,7 @@ class DependentsController < ApplicationController
             redirect to "/dependents/#{@dependent.id}/edit"
         else
             @dependent.name = params["name"]
+            @dependent.relationship = params["relationship"]
             @dependent.activities.all.each do |a|
                 a.dependent_name = params["name"]
                 a.save
