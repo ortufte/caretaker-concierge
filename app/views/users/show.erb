@@ -7,17 +7,20 @@
 <br>
 <div class="container">
 <div class="column">
-    <% @user.dependents.each do |d| %>
-        <h5 class="subtitle has-text-weight-bold"><a href="/dependents/<%=d.id%>"><%= d.name %> - <%= d.relationship %></a></h5>
-        <% d.activities.each do |a| %> 
-            <p><a href="/activities/<%= a.id %>"><%= a.title %></a></p>
-            <p>Contact Name: <%= a.contact_name %></p>
-            <p>Contact Phone: <%= a.contact_phone %></p>
-            <p>Website: <%= a.website %></p>
-            <p>Notes: <%= a.notes %></p>
-        <% end %>
+<% @user.dependents.each do |d| %>
+    <h5 class="subtitle has-text-weight-bold"><a href="/dependents/<%=d.id%>"><%= d.name %> - <%= d.relationship %></a></h5>
+    <% d.activities.each do |a| %> 
+        <p><a href="/activities/<%= a.id %>"><%= a.title %></a></p>
+        <p>Contact Name: <%= a.contact_name %></p>
+        <p>Contact Phone: <%= a.contact_phone %></p>
+        <p>Website: <%= a.website %></p>
+        <p>Notes: <%= a.notes %></p>
         <br>
     <% end %>
+    <br>
+<% end %>
+    <br>
+    <br>
     </div>
 </div>
 
