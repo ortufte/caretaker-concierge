@@ -14,7 +14,7 @@ Specs:
 - [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code - * *README.md includes a short description, install instructions, a contributors guide and a link to the license for your code* *
 
 Confirm
-- [x] You have a large number of small Git commits - * *93 commits - yikes!* *
+- [x] You have a large number of small Git commits - * *98 commits and counting- yikes!* *
 - [x] Your commit messages are meaningful - * *I need practice on this* *
 - [x] You made the changes in a commit that relate to the commit message - * *For the most part, I believe* *
 - [x] You don't include changes in a commit that aren't related to the commit message - * *I need to work on making more specific commits in the future, but for the most part they should be ok* *
