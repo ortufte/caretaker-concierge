@@ -10,12 +10,12 @@
 <br>
 <label>Dependent Name: 
 <input type=text name="dependent_name">
-</label>
+</label> *required
 <br>
 <br>
 <label>Activity Title: 
 <input type=text name="title">
-</label>
+</label> *required
 <br>
 <br>
 <label>Contact Name: 
@@ -39,10 +39,9 @@
 <br>
 <br>
 <input type=submit value=Create Activity id=submit>
-
 </form>
 <br>
-<br>
+<a href="/users/<%=current_user.id %>">Cancel</a>
 
 
 
